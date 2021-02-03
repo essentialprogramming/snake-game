@@ -1,4 +1,4 @@
-Snake Game
+### Snake Game
 A console-based version of the beloved [game of Snake](https://www.google.com/search?q=play+snake) using Python 3 and domain driven design.
 
 ## Play the game
