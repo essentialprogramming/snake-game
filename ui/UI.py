@@ -32,7 +32,6 @@ class UI:
         self.GOODBYE_MESSAGE = 'We are sorry to see you go..'
 
     def drawSnakeAndApples(self):
-        playerBoard = self.controller.getPlayer().getGameBoard()
         self.controller.placeSnake()
         self.controller.placeApples()
 
