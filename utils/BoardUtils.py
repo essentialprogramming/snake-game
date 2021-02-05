@@ -51,6 +51,15 @@ class BoardUtils:
         return counter
 
     @staticmethod
+    def findElement(board, element):
+        for row in range(len(board)):
+            line = board[row]
+            for column in range(len(line)):
+                if board[row][column] == element:
+                    return row, column
+        return None
+
+    @staticmethod
     def neighborsBoard(board, radius, rowNumber, columnNumber):
         return [[board[i][j] if 0 <= i < len(board) and 0 <= j < len(board[0]) else Constants.EMPTY
                  for j in range(columnNumber - radius, columnNumber + radius + 1)]
@@ -84,13 +93,13 @@ class BoardUtils:
     @staticmethod
     def surroundingContains(board, row, column, piece):
         """
-        Checks if the surrounding cells of a cell are taken
+        Checks if the surrounding cells of a cell contain a piece
           :param board
           :param row
           :param column
           :param piece
 
-        :return: false(if occupied) or true
+        :return: false(if contains) or true
         """
 
         neighboursList = list(BoardUtils.neighborsList(board, 1, row, column))
@@ -100,15 +109,15 @@ class BoardUtils:
         return False
 
     @staticmethod
-    def surroundingContains2(board, row, column, piece):
+    def neighboursContains(board, row, column, piece):
         """
-        Checks if the surrounding cells of a cell are taken
+        Checks if the neighbour cells(left, right, up, down) of a cell contain a piece
           :param board
           :param row
           :param column
           :param piece
 
-        :return: false(if occupied) or true
+        :return: false(if contains) or true
         """
 
         neighboursList = []

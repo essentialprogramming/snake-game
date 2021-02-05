@@ -37,7 +37,7 @@ class GameService:
         directionRowIndex, directionColumnIndex = BoardUtils.DIRECTIONS.get(direction)
         for i in range(n):
             board = BoardUtils.clone(gameBoard.getBoard())
-            row, column = GameService.getSnakeHead(gameBoard)
+            row, column = self.currentPlayer.snake.getHead()
             GameService.validateMove(board, row + directionRowIndex, column + directionColumnIndex)
             eatApple = False
             if board[row + directionRowIndex][column + directionColumnIndex] == Constants.APPLE:
@@ -64,10 +64,9 @@ class GameService:
         board = BoardUtils.clone(playerBoard.getBoard())
 
         row, column = BoardUtils.rowCount(board) // 2 - 1, BoardUtils.columnCount(board) // 2
-
         board, snake_coordinates = GameService.insertSnake(board, row, column)
-        playerBoard.setBoard(board)
 
+        playerBoard.setBoard(board)
         self.currentPlayer.snake.addCoordinates(snake_coordinates)
 
     def placeApples(self):
@@ -78,7 +77,7 @@ class GameService:
                 for appleCount in range(Constants.APPLE_COUNT):
                     rowIndex, columnIndex = \
                         BoardUtils.randomCustomPosition(board, lambda
-                            row, column: not BoardUtils.surroundingContains2(board, row, column, "."))
+                            row, column: not BoardUtils.neighboursContains(board, row, column, "."))
                     board[rowIndex][columnIndex] = Constants.APPLE
                 applesInserted = True
             except (ServiceException, ValueError):
@@ -126,15 +125,6 @@ class GameService:
             raise position_error
         if board[row][column] == "+":
             raise overlap_error
-
-    @staticmethod
-    def getSnakeHead(gameBoard):
-        board = gameBoard.getBoard()
-        for row in range(len(board)):
-            line = board[row]
-            for column in range(len(line)):
-                if board[row][column] == '*':
-                    return row, column
 
     def getPlayer(self):
         return self.currentPlayer

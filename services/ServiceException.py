@@ -4,7 +4,7 @@ class ServiceException(Exception):
     """
     def __init__(self, message=None):
         """
-        Constructor for controller exception class
+        Constructor for service exception class
         param message: A string representing the exception message
         """
         if message is None:
