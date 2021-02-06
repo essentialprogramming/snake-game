@@ -66,6 +66,6 @@ class Snake(object):
 
               *+++    =      right
          """
-        row, column = self.snakeCoordinates[len(self.snakeCoordinates) - 2]
-        row2, column2 = self.snakeCoordinates[len(self.snakeCoordinates) - 1]
-        return Matrix.direction(row, column, row2, column2)
+        previousTailRow, previousTailColumn = self.snakeCoordinates[len(self.snakeCoordinates) - 2]
+        tailRow, tailColumn = self.snakeCoordinates[len(self.snakeCoordinates) - 1]
+        return Matrix.direction(previousTailRow, previousTailColumn, tailRow, tailColumn)

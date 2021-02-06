@@ -83,7 +83,8 @@ class GameService:
             except (ServiceException, ValueError):
                 continue
 
-    def insertApple(self, board):
+    @staticmethod
+    def insertApple(board):
         appleInserted = False
         while not appleInserted:
             try:
